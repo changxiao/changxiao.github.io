@@ -6,11 +6,11 @@ self.addEventListener('install', event => {
   
   // 获取cow照片到v4缓存
   event.waitUntil(
-    caches.open('static-v4').then(cache => cache.add('cow.svg'))
+    caches.open('static-v4').then(cache => cache.add('/cow.svg'))
   );
   // 获取horse照片到v5缓存
   event.waitUntil(
-    caches.open('static-v5').then(cache => cache.add('horse.svg'))
+    caches.open('static-v5').then(cache => cache.add('/horse.svg'))
   );
 });
 
@@ -24,7 +24,7 @@ self.addEventListener('activate', event => {
         }
       })
     )).then(() => {
-      console.log('V3 now ready to handle fetches!');
+      console.log('V4 V5 now ready to handle fetches!');
     })
   );
 });
@@ -33,10 +33,10 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
   // 如果路径是dog，返回chaches中的cow
-  if (url.origin == location.origin && url.pathname.endsWith('/dog.svg')) {
+  if (url.origin == location.origin && url.pathname.endsWith('/cat.svg')) {
     event.respondWith(caches.match('/cow.svg'));
   }
-  if (url.origin == location.origin && url.pathname.endsWith('/cat.svg')) {
+  if (url.origin == location.origin && url.pathname.endsWith('/dog.svg')) {
     event.respondWith(caches.match('/horse.svg'));
   }
 });
