@@ -34,9 +34,9 @@ self.addEventListener('fetch', event => {
 
   // 如果路径是dog，返回chaches中的cow
   if (url.origin == location.origin && url.pathname.endsWith('/dog.svg')) {
-    event.respondWith(caches.match('cow.svg'));
+    event.respondWith(caches.match('/cow.svg'));
   }
   if (url.origin == location.origin && url.pathname.endsWith('/cat.svg')) {
-    event.respondWith(caches.match('horse.svg'));
+    event.respondWith(caches.match('/horse.svg'));
   }
 });
