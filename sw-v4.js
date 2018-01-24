@@ -1,14 +1,19 @@
-const expectedCaches = ['static-v3'];
+const expectedCaches = ['static-v4'];
+const expectedCaches2 = ['static-v5'];
 
 self.addEventListener('install', event => {
-  console.log('V3 Installing…');
+  console.log('V4 V5 Installing…');
   
   // 不等待，直接激活
   self.skipWaiting();
   
-  // 获取cow照片到缓存
+  // 获取cow照片到v4缓存
   event.waitUntil(
-    caches.open('static-v3').then(cache => cache.add('cow.svg'))
+    caches.open('static-v4').then(cache => cache.add('cow.svg'))
+  );
+  // 获取horse照片到v5缓存
+  event.waitUntil(
+    caches.open('static-v5').then(cache => cache.add('horse.svg'))
   );
 });
 
@@ -17,7 +22,7 @@ self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
       keys.map(key => {
-        if (!expectedCaches.includes(key)) {
+        if (!expectedCaches.includes(key) || !expectedCaches2.includes(key)) {
           return caches.delete(key);
         }
       })
@@ -33,5 +38,8 @@ self.addEventListener('fetch', event => {
   // 如果路径是dog，返回chaches中的cow
   if (url.origin == location.origin && url.pathname.endsWith('/dog.svg')) {
     event.respondWith(caches.match('cow.svg'));
+  }
+  if (url.origin == location.origin && url.pathname.endsWith('/cat.svg')) {
+    event.respondWith(caches.match('horse.svg'));
   }
 });

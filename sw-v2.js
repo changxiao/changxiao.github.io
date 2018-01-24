@@ -3,15 +3,14 @@ const expectedCaches = ['static-v2'];
 self.addEventListener('install', event => {
   console.log('V2 installing…');
 
-  // cache a horse SVG into a new cache, static-v2
+  // 在static-v2中缓存一个horse图片
   event.waitUntil(
     caches.open('static-v2').then(cache => cache.add('/horse.svg'))
   );
 });
 
 self.addEventListener('activate', event => {
-  // delete any caches that aren't in expectedCaches
-  // which will get rid of static-v1
+  // 删除cachesName不是expectedCaches的其他chaches
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
       keys.map(key => {
@@ -28,8 +27,7 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // serve the horse SVG from the cache if the request is
-  // same-origin and the path is '/dog.svg'
+   // 如果路径是dog，返回chaches中的horse
   if (url.origin == location.origin && url.pathname == '/dog.svg') {
     event.respondWith(caches.match('/horse.svg'));
   }

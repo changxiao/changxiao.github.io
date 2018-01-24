@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
-3秒后出现狗，再次访问显示猫
+3秒后显示狗
 <script>
-  navigator.serviceWorker.register('sw.js') // 注册sw
+  navigator.serviceWorker.register('sw-v4.js')
     .then(reg => console.log('SW registered!', reg))
     .catch(err => console.log('Boo!', err));
 
@@ -10,6 +10,13 @@
     const img = new Image();
     img.width = 300;
     img.src = 'dog.svg';
+    img.style.display = 'block';
+    document.body.appendChild(img);
+  }, 3000);
+  setTimeout(() => {
+    const img = new Image();
+    img.width = 300;
+    img.src = 'cat.svg';
     img.style.display = 'block';
     document.body.appendChild(img);
   }, 3000);
