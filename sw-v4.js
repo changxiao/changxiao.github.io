@@ -27,6 +27,8 @@ self.addEventListener('activate', event => {
       console.log('V4 V5 now ready to handle fetches!');
     })
   );
+
+  // self.clients.claim();
 });
 
 self.addEventListener('fetch', event => {
