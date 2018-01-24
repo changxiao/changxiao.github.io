@@ -3,8 +3,6 @@ const expectedCaches = ['static-v3'];
 self.addEventListener('install', event => {
   console.log('V3 Installing…');
   
-  // 不等待，直接激活
-  self.skipWaiting();
   
   // 获取cow照片到缓存
   event.waitUntil(
