@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+An image will appear here in 3 seconds (<a href="https://thenounproject.com/term/cat/6725/">cat.svg by Marco Hernandez</a>, <a href="https://thenounproject.com/term/stallion/568432">horse.svg by Carla Dias</a>, <a href="https://thenounproject.com/term/cow/572518/">cow.svg by alexanrlavreniuk</a>):
+<script>
+  navigator.serviceWorker.register('sw-v3.js')
+    .then(reg => console.log('SW registered!', reg))
+    .catch(err => console.log('Boo!', err));
+
+  setTimeout(() => {
+    const img = new Image();
+    img.width = 300;
+    img.src = 'dog.svg';
+    img.style.display = 'block';
+    document.body.appendChild(img);
+  }, 3000);
+</script>
