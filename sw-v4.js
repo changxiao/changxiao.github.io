@@ -4,9 +4,6 @@ const expectedCaches2 = ['static-v5'];
 self.addEventListener('install', event => {
   console.log('V4 V5 Installing…');
   
-  // 不等待，直接激活
-  self.skipWaiting();
-  
   // 获取cow照片到v4缓存
   event.waitUntil(
     caches.open('static-v4').then(cache => cache.add('cow.svg'))
