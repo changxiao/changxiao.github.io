@@ -19,7 +19,7 @@ self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
       keys.map(key => {
-        if (!expectedCaches.includes(key) || !expectedCaches2.includes(key)) {
+        if (!expectedCaches.includes(key) && !expectedCaches2.includes(key)) {
           return caches.delete(key);
         }
       })
